@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
+
 
 typedef struct EntityData
 {
@@ -13,6 +15,13 @@ typedef struct EntityData
 
 Entity_info Player1,Enemy;
 
+
+
+
+
+int ChanceCalc(int max){
+    return rand()% max;
+}
 
 //Function to initialize player data
 void InitPlayer(){
@@ -42,7 +51,7 @@ int PlayerTurn(int Attk,int Def){
     printf("(1)Attack or (2)Defend\n");
     scanf("%d",&choice);
     if(choice==1){
-        return Attk-Def;
+        return ChanceCalc(Attk-Def);
     }else{
         return 0;
     }
@@ -50,7 +59,9 @@ int PlayerTurn(int Attk,int Def){
 
 //The Enemy Turn
 int EnemyTurn(int Attk,int Def){
-    return 0;
+    if(Attk<Def) return 0;
+    else
+    return ChanceCalc(Attk-Def);
 }
 
 
